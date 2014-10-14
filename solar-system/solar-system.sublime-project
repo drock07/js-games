@@ -1,0 +1,21 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "R:\\Users\\David\\Documents\\Developer\\js-games"
+		},
+		{
+			"file_exclude_patterns":
+			[
+				"*.sublime-*"
+			],
+			"follow_symlinks": true,
+			"path": "."
+		}
+	],
+	"settings":
+	{
+		"tab_size": 4
+	}
+}
