@@ -1,0 +1,12 @@
+{
+    "name": "solar-system",
+    "version": "0.0.0",
+    "description": "A basic solar system animation using the HTML5 canvas and javascript.",
+    "main": "index.html",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/drock07/js-games"
+    },
+    "author": "David Rockwood",
+    "license": "MIT"
+}
