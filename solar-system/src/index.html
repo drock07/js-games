@@ -1,0 +1,21 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Solar System</title>
+
+    <link rel="stylesheet" href="solar.css">
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script src="solar.js"></script>
+    <script>
+        var canvas = document.querySelector('#canvas');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        var ss = new SolarSystem(canvas);
+    </script>
+</body>
+</html>
