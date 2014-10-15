@@ -117,6 +117,6 @@ gulp.task('build:production', ['clean:production'], function() {
         .pipe(gulp.dest(outs.productionDir))
 });
 
-gulp.task('default', ['build:dev', 'index:watch', 'js:watch', 'stylus:watch', 'browser-sync', 'test:cont']);
+gulp.task('default', ['build:dev', 'index:watch', 'js:watch', 'stylus:watch', 'browser-sync']);
 
 // TODO: add a task for building for production
