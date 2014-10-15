@@ -8,17 +8,19 @@ var contConcat = require('gulp-continuous-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var changed = require('gulp-changed');
-var clean = require('gulp-clean');
 var util = require('gulp-util');
 var watch = require('gulp-watch');
 var plumber = require('gulp-plumber');
 var template = require('gulp-template');
+var del = require('del');
 var browserSync = require('browser-sync');
+var karma = require('karma').server;
 
 var ins = {
     js: ['src/**/*.js'],
     stylus: 'src/stylus/main.styl',
-    html: 'src/index.html'
+    html: 'src/index.html',
+    karma: 'karma.conf.js'
 };
 
 var outs = {
@@ -26,22 +28,37 @@ var outs = {
     productionDir: 'bin'
 };
 
-gulp.task('clean:dev', function() {
-    return gulp.src(outs.devDir, {read: false})
-        .pipe(clean());
+gulp.task('clean:dev', function(cb) {
+    del([
+        outs.devDir
+    ], cb);
 });
 
 gulp.task('clean:production', function() {
-    return gulp.src(outs.production, {read: false})
-        .pipe(clean());
+    del([
+        outs.productionDir
+    ], cb);
 });
 
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', ['build:dev'], function() {
     browserSync(['./build/solar.js', './build/index.html'], {
         server: {
             baseDir: "./build/"
         }
     });
+});
+
+gulp.task('test:once', function(done) {
+    karma.start({
+        configFile: __dirname + '/' + ins.karma,
+        singleRun: true
+    }, done);
+});
+
+gulp.task('test:cont', function(done) {
+    karma.start({
+        configFile: __dirname + '/' + ins.karma
+    }, done);
 });
 
 ///////////////////
@@ -100,6 +117,6 @@ gulp.task('build:production', ['clean:production'], function() {
         .pipe(gulp.dest(outs.productionDir))
 });
 
-gulp.task('default', ['clean:dev', 'build:dev', 'index:watch', 'js:watch', 'stylus:watch', 'browser-sync']);
+gulp.task('default', ['build:dev', 'index:watch', 'js:watch', 'stylus:watch', 'browser-sync', 'test:cont']);
 
 // TODO: add a task for building for production
